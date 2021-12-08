@@ -7,39 +7,6 @@ title = st.container()
 dbdesc = st.container()
 topProducts = st.container()
 
-# Initialize connection.
-# Uses st.cache to only run once.
-@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
-def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
-
-conn = init_connection()
-
-# Perform query.
-# Uses st.cache to only rerun when the query changes or after 10 min.
-@st.cache(ttl=600)
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
-
-
-cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
-	   '       YEAR(O.orderDate) AS ordYear,         ' +
-   '       D.productCode,                        ' +
-   '       P.productName,                        ' +
-   '       D.quantityOrdered,                    ' +
-   '       D.priceEach                           ' +
-   '  FROM orders AS O                           ' +
-   '  JOIN orderdetails AS D USING (orderNumber) ' +
-   '  JOIN products AS P USING (productCode)')
-
-rows = run_query(cmd)
-
-# Print results.
-for row in rows:
-    st.write(f"{row[0]} has a :{row[1]}:")
-
 with title:
     st.title('Classic Models Performance Dashboard')
     
@@ -85,19 +52,19 @@ with topProducts:
     #             user='root',
     #             password='*****')   # Enter user password here
     
-#     c = sql.connect(connstring)
+    c = sql.connect(connstring)
 
-#     cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
-# 	   '       YEAR(O.orderDate) AS ordYear,         ' +
-#        '       D.productCode,                        ' +
-#        '       P.productName,                        ' +
-#        '       D.quantityOrdered,                    ' +
-#        '       D.priceEach                           ' +
-#        '  FROM orders AS O                           ' +
-#        '  JOIN orderdetails AS D USING (orderNumber) ' +
-#        '  JOIN products AS P USING (productCode)')
+    cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
+	   '       YEAR(O.orderDate) AS ordYear,         ' +
+       '       D.productCode,                        ' +
+       '       P.productName,                        ' +
+       '       D.quantityOrdered,                    ' +
+       '       D.priceEach                           ' +
+       '  FROM orders AS O                           ' +
+       '  JOIN orderdetails AS D USING (orderNumber) ' +
+       '  JOIN products AS P USING (productCode)')
 
-#     df = pd.read_sql(cmd, c)
+    df = pd.read_sql(cmd, c)
     
     # Clean the data based on inputs above
     df = df[(df['ordMonth'] >= monthmap[monthrange[0]]) & (df['ordMonth'] <= monthmap[monthrange[1]])]
