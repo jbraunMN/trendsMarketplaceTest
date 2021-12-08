@@ -1,7 +1,7 @@
-import streamlit as st
-import mysql.connector as sql
-import pandas as pd
-import matplotlib.pyplot as plt
+# import streamlit as st
+# import mysql.connector as sql
+# import pandas as pd
+# import matplotlib.pyplot as plt
 
 title = st.container()
 dbdesc = st.container()
@@ -46,12 +46,13 @@ with topProducts:
     measure = st.selectbox(label = 'Order by Units or Dollars sold?',
                            options = ['Units', 'Dollars'])
     
-    # Read SQL data
-    c = sql.connect(host='localhost',
-                database='classicmodels',
-                user='root',
-                password='*****')   # Enter user password here
+    # # Read SQL data
+    # c = sql.connect(host='localhost',
+    #             database='classicmodels',
+    #             user='root',
+    #             password='*****')   # Enter user password here
     
+    c = sql.connect(connstring)
 
     cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
 	   '       YEAR(O.orderDate) AS ordYear,         ' +
