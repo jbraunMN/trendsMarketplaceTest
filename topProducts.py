@@ -20,6 +20,9 @@ with dbdesc:
     st.caption('This database can be installed at \
                https://www.mysqltutorial.org/mysql-sample-database.aspx')
 
+    st.write(connstring)
+    
+    
 with topProducts:
     st.header('Top products in selected time period:')
     
