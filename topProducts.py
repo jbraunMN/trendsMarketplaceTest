@@ -20,7 +20,6 @@ with dbdesc:
     st.caption('This database can be installed at \
                https://www.mysqltutorial.org/mysql-sample-database.aspx')
 
-    st.write(st.secrets['connstring'])
     
     
 with topProducts:
@@ -49,13 +48,14 @@ with topProducts:
     measure = st.selectbox(label = 'Order by Units or Dollars sold?',
                            options = ['Units', 'Dollars'])
     
-    # # Read SQL data
-    # c = sql.connect(host='localhost',
-    #             database='classicmodels',
-    #             user='root',
-    #             password='*****')   # Enter user password here
+    # Read SQL data
+    c = sql.connect(host='localhost',
+                    port=3306
+                    database='classicmodels',
+                    user='jbPublic',
+                    password='mySQLconn3ct')   # Enter user password here
     
-    c = sql.connect(st.secrets['connstring'])
+
 
     cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
 	   '       YEAR(O.orderDate) AS ordYear,         ' +
