@@ -48,25 +48,27 @@ with topProducts:
     measure = st.selectbox(label = 'Order by Units or Dollars sold?',
                            options = ['Units', 'Dollars'])
     
-    # Read SQL data
-    c = sql.connect(host='localhost',
-                    database='classicmodels',
-                    user='jbPublic',
-                    password='123')   # Enter user password here
+#     # Read SQL data
+#     c = sql.connect(host='localhost',
+#                     database='classicmodels',
+#                     user='jbPublic',
+#                     password='mySQLconn3ct')   # Enter user password here
     
 
 
-    cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
-	   '       YEAR(O.orderDate) AS ordYear,         ' +
-       '       D.productCode,                        ' +
-       '       P.productName,                        ' +
-       '       D.quantityOrdered,                    ' +
-       '       D.priceEach                           ' +
-       '  FROM orders AS O                           ' +
-       '  JOIN orderdetails AS D USING (orderNumber) ' +
-       '  JOIN products AS P USING (productCode)')
+#     cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
+# 	   '       YEAR(O.orderDate) AS ordYear,         ' +
+#        '       D.productCode,                        ' +
+#        '       P.productName,                        ' +
+#        '       D.quantityOrdered,                    ' +
+#        '       D.priceEach                           ' +
+#        '  FROM orders AS O                           ' +
+#        '  JOIN orderdetails AS D USING (orderNumber) ' +
+#        '  JOIN products AS P USING (productCode)')
 
-    df = pd.read_sql(cmd, c)
+#     df = pd.read_sql(cmd, c)
+
+    df = pd.read_csv('jbdf.csv')
     
     # Clean the data based on inputs above
     df = df[(df['ordMonth'] >= monthmap[monthrange[0]]) & (df['ordMonth'] <= monthmap[monthrange[1]])]
