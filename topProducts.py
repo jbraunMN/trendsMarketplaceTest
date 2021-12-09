@@ -49,8 +49,7 @@ with topProducts:
                            options = ['Units', 'Dollars'])
     
     # Read SQL data
-    c = sql.connect(host='192.168.86.24',
-		    port = 3306,
+    c = sql.connect(host='localhost',
                     database='classicmodels',
                     user='jbPublic',
                     password='mySQLconn3ct')   # Enter user password here
