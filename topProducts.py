@@ -50,6 +50,7 @@ with topProducts:
     
     # Read SQL data
     c = sql.connect(host='localhost',
+		    port = 3306,
                     database='classicmodels',
                     user='jbPublic',
                     password='mySQLconn3ct')   # Enter user password here
