@@ -20,7 +20,7 @@ with dbdesc:
     st.caption('This database can be installed at \
                https://www.mysqltutorial.org/mysql-sample-database.aspx')
 
-    st.write(connstring)
+    st.write(st.secrets['connstring'])
     
     
 with topProducts:
@@ -55,7 +55,7 @@ with topProducts:
     #             user='root',
     #             password='*****')   # Enter user password here
     
-    c = sql.connect(connstring)
+    c = sql.connect(st.secrets['connstring'])
 
     cmd = ('SELECT MONTH(O.orderDate) AS ordMonth,       ' +
 	   '       YEAR(O.orderDate) AS ordYear,         ' +
